@@ -743,6 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrannyController
   _rb: {fileID: 969235705}
+  _anim: {fileID: 1898685319}
   _cam: {fileID: 330585546}
   movespeed: 5
   turnSmoothing: 0.075

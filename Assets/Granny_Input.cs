@@ -254,7 +254,7 @@ public partial class @Granny_Input: IInputActionCollection2, IDisposable
                     ""id"": ""e8980521-7517-48fb-8fad-e485a4233db3"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.4,max=0.8)"",
                     ""groups"": "";GamePad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,

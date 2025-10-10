@@ -6,6 +6,7 @@ public class GrannyController : MonoBehaviour
 
     Granny_Input _inputActions;
     [SerializeField] Rigidbody _rb;
+    [SerializeField] Animator _anim;
     [SerializeField] private Transform _cam;
 
     [Header("Movement Variables")]
@@ -40,6 +41,7 @@ public class GrannyController : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _anim = GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -74,10 +76,18 @@ public class GrannyController : MonoBehaviour
             moveInput = _inputActions.Player.Move.ReadValue<Vector2>();
             aimInput = _inputActions.Player.Camera.ReadValue<Vector2>();
 
-        if(_inputActions.Player.Jump.triggered && isGrounded)
+        if(_inputActions.Player.Jump.triggered && isGrounded && !zoomedIn)
         {
             PlayerJump();
         }
+
+        //========= Animation States =========
+        _anim.SetFloat("XDirection", moveInput.x);
+        _anim.SetFloat("YDirection", moveInput .y);
+        _anim.SetBool("Zoom", zoomedIn);
+        _anim.SetBool("Grounded", isGrounded);
+        _anim.SetFloat("VSpeed", _rb.linearVelocity.y);
+        //====================================
     }
 
     private void FixedUpdate()
@@ -88,7 +98,8 @@ public class GrannyController : MonoBehaviour
     void PlayerMove()
     {
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
-        
+        _anim.SetFloat("Speed", moveDirection.magnitude);
+
         if(moveDirection != Vector3.zero)
         {
             if(moveDirection.magnitude >= .1)
