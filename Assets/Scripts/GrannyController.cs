@@ -28,6 +28,8 @@ public class GrannyController : MonoBehaviour
     public float rotationY;
     public float playerRotationSpeed = 15f;
     public float playerLookSpeed = 50f;
+    public Transform camTarget;
+    public Unity.Cinemachine.InputAxis yAxis;
 
     
     private void Awake()
@@ -109,9 +111,13 @@ public class GrannyController : MonoBehaviour
 
         if (zoomedIn)
         {
+            yAxis.Value = aimInput.y * playerLookSpeed * Time.fixedDeltaTime;
+            rotationY += yAxis.Value;
+            rotationY = Mathf.Clamp(rotationY, -40, 40);
+            camTarget.localEulerAngles = new Vector3(-rotationY, 0, 0);
+
             rotationX = aimInput.x * playerRotationSpeed * Time.fixedDeltaTime;
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + rotationX, 0);
-            
         }
     }
     void PlayerJump()

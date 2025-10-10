@@ -342,7 +342,7 @@ public partial class @Granny_Input: IInputActionCollection2, IDisposable
                     ""id"": ""e7039692-19ae-49fe-b80a-97d958bd4760"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=5,y=3)"",
                     ""groups"": "";GamePad"",
                     ""action"": ""Camera"",
                     ""isComposite"": false,
