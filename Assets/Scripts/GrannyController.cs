@@ -13,6 +13,7 @@ public class GrannyController : MonoBehaviour
     public float turnSmoothing = 0.25f;
     public float turnSmoothVelocity;
     [SerializeField] Vector2 moveInput;
+    [SerializeField] Vector2 aimInput;
 
     [Header("Jumping Variables")]
     public Transform groundCheck;
@@ -20,6 +21,14 @@ public class GrannyController : MonoBehaviour
     [SerializeField] private Collider[] col;
     public bool isGrounded;
     public float jumpForce = 12f;
+
+    [Header("Shotting Variables")]
+    public bool zoomedIn;
+    public float rotationX;
+    public float rotationY;
+    public float playerRotationSpeed = 15f;
+    public float playerLookSpeed = 50f;
+
     
     private void Awake()
     {
@@ -51,7 +60,17 @@ public class GrannyController : MonoBehaviour
             isGrounded = false;
         }
 
-        moveInput = _inputActions.Player.Move.ReadValue<Vector2>();
+        if (_inputActions.Player.Aim.IsPressed())
+        {
+            zoomedIn = true;
+        }
+        else
+        {
+            zoomedIn= false;
+        }
+
+            moveInput = _inputActions.Player.Move.ReadValue<Vector2>();
+            aimInput = _inputActions.Player.Camera.ReadValue<Vector2>();
 
         if(_inputActions.Player.Jump.triggered && isGrounded)
         {
@@ -78,12 +97,22 @@ public class GrannyController : MonoBehaviour
                                                      ref turnSmoothing, 
                                                      turnSmoothVelocity);
 
-                transform.rotation = Quaternion.Euler(0, _angle, 0);
+                if (!zoomedIn)
+                {
+                    transform.rotation = Quaternion.Euler(0, _angle, 0);
+                }
 
                 Vector3 moveDirCam = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-                _rb.MovePosition(transform.position + moveDirection * movespeed * Time.fixedDeltaTime);
+                _rb.MovePosition(transform.position + moveDirCam * movespeed * Time.fixedDeltaTime);
             }
-        } 
+        }
+
+        if (zoomedIn)
+        {
+            rotationX = aimInput.x * playerRotationSpeed * Time.fixedDeltaTime;
+            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + rotationX, 0);
+            
+        }
     }
     void PlayerJump()
     {
