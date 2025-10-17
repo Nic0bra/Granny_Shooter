@@ -12,6 +12,10 @@ public class GrannyAttackScript : MonoBehaviour
     public Rigidbody chargedShot;
     public Transform bulletSpawnPoint;
 
+    [Header("Aim Variables")]
+    public Transform _indicator;
+    public LayerMask aimColliderMask = new LayerMask();
+
     //input actions need an awake function
     private void Awake()
     {
@@ -37,6 +41,17 @@ public class GrannyAttackScript : MonoBehaviour
             {
                 StartCoroutine(RegularShot());
             }
+        }
+
+        //Aiming Controls
+        Vector2 screenCenterPoint = new Vector2(Screen.width * .5f, Screen.height * .5f);
+
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+        if (Physics.Raycast(ray, out RaycastHit rayCastHit, 999f, aimColliderMask))
+        {
+            _indicator.position = rayCastHit.point;
+            bulletSpawnPoint.LookAt(rayCastHit.point);
         }
     }
 
