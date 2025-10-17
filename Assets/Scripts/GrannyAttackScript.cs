@@ -16,6 +16,11 @@ public class GrannyAttackScript : MonoBehaviour
     public Transform _indicator;
     public LayerMask aimColliderMask = new LayerMask();
 
+    [Header("Charged Shot Variables")]
+    [SerializeField] private float chargeGauge;
+    public float chargeTimer = 1.5f;
+    public bool isCharging;
+
     //input actions need an awake function
     private void Awake()
     {
@@ -42,6 +47,28 @@ public class GrannyAttackScript : MonoBehaviour
                 StartCoroutine(RegularShot());
             }
         }
+        //------------------ Charging Actions -------------------
+        if (_actions.Player.Attack.IsPressed())
+        {
+            isCharging = true;
+        }
+        else isCharging = false;
+
+        if (isCharging)
+        {
+            chargeGauge += Time.deltaTime;
+        }
+
+        if (_actions.Player.Attack.WasReleasedThisFrame())
+        {
+            if(chargeGauge >= chargeTimer && grannyController.zoomedIn)
+            {
+                StartCoroutine(ChargedShot());
+                chargeGauge = 0;
+            }
+            else chargeGauge = 0;
+        }
+        //----------------------------------------------------------
 
         //Aiming Controls
         Vector2 screenCenterPoint = new Vector2(Screen.width * .5f, Screen.height * .5f);
@@ -63,6 +90,20 @@ public class GrannyAttackScript : MonoBehaviour
             bulletSpawnPoint.rotation) as Rigidbody;
 
         _shot.AddForce(bulletSpawnPoint.forward *  bulletSpeed, ForceMode.Force);
+
+        yield return null;
+
+        RumbleManager.Instance.RumblePulse(.25f, .25f, .1f);
+    }
+
+    IEnumerator ChargedShot()
+    {
+        Rigidbody _shot;
+        _shot = Instantiate(chargedShot,
+            bulletSpawnPoint.position,
+            bulletSpawnPoint.rotation) as Rigidbody;
+
+        _shot.AddForce(bulletSpawnPoint.forward * bulletSpeed, ForceMode.Force);
 
         yield return null;
     }
