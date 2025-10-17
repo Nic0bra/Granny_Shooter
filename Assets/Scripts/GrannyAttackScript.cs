@@ -91,9 +91,9 @@ public class GrannyAttackScript : MonoBehaviour
 
         _shot.AddForce(bulletSpawnPoint.forward *  bulletSpeed, ForceMode.Force);
 
-        yield return null;
-
         RumbleManager.Instance.RumblePulse(.25f, .25f, .1f);
+
+        yield return null;
     }
 
     IEnumerator ChargedShot()
@@ -104,6 +104,8 @@ public class GrannyAttackScript : MonoBehaviour
             bulletSpawnPoint.rotation) as Rigidbody;
 
         _shot.AddForce(bulletSpawnPoint.forward * bulletSpeed, ForceMode.Force);
+
+        RumbleManager.Instance.RumblePulse(.5f, .5f, .25f);
 
         yield return null;
     }
