@@ -16,15 +16,25 @@ public class EnemyHealthScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-         if (other.gameObject.tag == "PlayerHitSphere")
+        if (other.gameObject.tag == "PlayerHitSphere")
         {
-            StartCoroutine(TakeDamage());
-        } 
+            StartCoroutine(TakeDamage(25));
+        }
+        else if (other.gameObject.tag == "RegularBullet")
+        {
+            StartCoroutine(TakeDamage(50));
+            Destroy(other.gameObject);
+        }
+        else if(other.gameObject.tag == "ChargedBullet")
+        {
+            StartCoroutine(TakeDamage(100));
+        }
     }
 
-    IEnumerator TakeDamage()
+    IEnumerator TakeDamage(int damage)
     {
-        enemyHealth--;
+        enemyHealth -= damage;
+        Debug.Log("Enemy health = " + enemyHealth);
         RumbleManager.Instance.RumblePulse(.3f, .6f, .25f);
         if(enemyHealth > 0)
         {
