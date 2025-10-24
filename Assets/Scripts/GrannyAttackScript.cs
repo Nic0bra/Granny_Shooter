@@ -111,6 +111,8 @@ public class GrannyAttackScript : MonoBehaviour
             _indicator.position = rayCastHit.point;
             bulletSpawnPoint.LookAt(rayCastHit.point);
         }
+
+        _anim.SetBool("Melee", canMelee);
     }
 
     IEnumerator MeleeAttack()
@@ -135,9 +137,11 @@ public class GrannyAttackScript : MonoBehaviour
             _anim.SetTrigger("Swing03");
         }
         canMelee = false;
+        yield return new WaitForSeconds(.25f);
         playerHitSphere.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.1f);
         playerHitSphere.SetActive(false);
+        yield return new WaitForSeconds(.4f);
         canMelee = true;
     }
 
