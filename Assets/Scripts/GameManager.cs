@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
             aimPanel.SetActive(false);
         }
 
-        chargeMeter = grannyAttack.chargeGauge;
+        chargeMeter = grannyAttack.chargeGauge - 0.5f;
+        chargeIcon.fillAmount = chargeMeter;
     }
 }

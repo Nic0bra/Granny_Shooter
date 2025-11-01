@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   aimPanel: {fileID: 683755594}
-  chargeIcon: {fileID: 0}
+  chargeIcon: {fileID: 1740844047}
   chargeMeter: 0
   chargeTimer: 2
 --- !u!4 &318754635
@@ -1520,7 +1520,7 @@ MonoBehaviour:
     m_SourceObjects:
       m_Length: 1
       m_Item0:
-        transform: {fileID: 1401605102}
+        transform: {fileID: 0}
         weight: 1
       m_Item1:
         transform: {fileID: 0}
@@ -1871,11 +1871,11 @@ Transform:
   m_GameObject: {fileID: 661017568}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.611, y: 1.1245, z: -0.1235}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1401605102}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &661017570
 SphereCollider:
@@ -3089,7 +3089,7 @@ MonoBehaviour:
   regularShot: {fileID: 2551695617682026122, guid: c82813360161957419c3f013fd08b6e4, type: 3}
   chargedShot: {fileID: 901777715522108103, guid: ff9938a1c1c4d21488015ede85db73ce, type: 3}
   bulletSpawnPoint: {fileID: 608677015}
-  _indicator: {fileID: 1401605102}
+  _indicator: {fileID: 661017569}
   aimColliderMask:
     serializedVersion: 2
     m_Bits: 448
@@ -3667,38 +3667,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3163208320312807776, guid: d617feccd70278d48b89ab4ab99098bb, type: 3}
   m_PrefabInstance: {fileID: 65286176}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1401605101
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1401605102}
-  m_Layer: 0
-  m_Name: Indicator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1401605102
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401605101}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47, y: 0.865, z: -0.095}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 661017569}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1401683755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1864740628597940677, guid: d617feccd70278d48b89ab4ab99098bb, type: 3}
@@ -5248,7 +5216,7 @@ SceneRoots:
   - {fileID: 1294236058}
   - {fileID: 1970040952}
   - {fileID: 838886855}
-  - {fileID: 1401605102}
+  - {fileID: 661017569}
   - {fileID: 1433455967}
   - {fileID: 318754635}
   - {fileID: 1519392499}
