@@ -27,7 +27,7 @@ public class GrannyAttackScript : MonoBehaviour
     public MultiAimConstraint _bodyAim;
 
     [Header("Charged Shot Variables")]
-    [SerializeField] private float chargeGauge;
+    public float chargeGauge;
     public float chargeTimer = 1.5f;
     public bool isCharging;
 

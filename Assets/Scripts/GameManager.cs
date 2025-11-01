@@ -1,13 +1,25 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     GrannyController grannyController;
+    GrannyAttackScript grannyAttack;
     public GameObject aimPanel;
+
+    //Charge Meter Setup
+    public Image chargeIcon;
+    public float chargeMeter;
+    public float chargeTimer = 2;
+
     private void Awake()
     {
         grannyController = GameObject.FindGameObjectWithTag("Player").
             GetComponent<GrannyController>();
+
+        grannyAttack = GameObject.FindGameObjectWithTag("Player").
+            GetComponent<GrannyAttackScript>();
     }
     private void Update()
     {
@@ -19,5 +31,7 @@ public class GameManager : MonoBehaviour
         {
             aimPanel.SetActive(false);
         }
+
+        chargeMeter = grannyAttack.chargeGauge;
     }
 }
