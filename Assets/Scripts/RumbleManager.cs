@@ -10,9 +10,7 @@ public class RumbleManager : MonoBehaviour
     private void Awake()
     {
         if(Instance == null)
-        {
             Instance = this;
-        }
     }
 
     public void RumblePulse(float lowFreq, float highFreq, float _duration)

@@ -17,18 +17,16 @@ public class EnemyHealthScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "PlayerHitSphere")
-        {
             StartCoroutine(TakeDamage(25));
-        }
+
         else if (other.gameObject.tag == "RegularBullet")
         {
             StartCoroutine(TakeDamage(50));
             Destroy(other.gameObject);
         }
+
         else if(other.gameObject.tag == "ChargedBullet")
-        {
             StartCoroutine(TakeDamage(100));
-        }
     }
 
     IEnumerator TakeDamage(int damage)
@@ -44,9 +42,7 @@ public class EnemyHealthScript : MonoBehaviour
             _rend.material = baseMat;
         }
         else
-        {
             Destroy(gameObject);
-        }
         
     }
 }

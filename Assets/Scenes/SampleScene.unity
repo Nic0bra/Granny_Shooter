@@ -529,7 +529,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236914519}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1905,7 +1905,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661017568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3082,8 +3082,10 @@ MonoBehaviour:
   _anim: {fileID: 0}
   playerHitSphere: {fileID: 236914519}
   comboID: 1
-  meleeTimer: 0.5
-  comboTimer: 0.75
+  meleeTimer: 0.4
+  comboTimer: 0.55
+  _melee: 0
+  _combo: 0
   canMelee: 0
   bulletSpeed: 1500
   regularShot: {fileID: 2551695617682026122, guid: c82813360161957419c3f013fd08b6e4, type: 3}

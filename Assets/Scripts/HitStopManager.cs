@@ -13,16 +13,12 @@ public class HitStopManager : MonoBehaviour
     {
         isFrozen = false;
         if(Instance == null)
-        {
             Instance = this;
-        }
     }
     private void Update()
     {
         if(pendingStopDuration != 0 && !isFrozen)
-        {
             StartCoroutine(HitStopTimer());
-        }
     }
 
     public void DoHitStop(float duration)

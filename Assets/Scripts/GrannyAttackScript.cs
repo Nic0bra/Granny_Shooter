@@ -13,6 +13,8 @@ public class GrannyAttackScript : MonoBehaviour
     public int comboID = 1;
     public float meleeTimer = .5f;
     public float comboTimer = .75f;
+    public float _melee;
+    public float _combo;
     public bool canMelee;
 
     [Header("Bullet Variables")]
@@ -57,29 +59,41 @@ public class GrannyAttackScript : MonoBehaviour
 
     private void Update()
     {
+        if(_melee <= 0)
+            canMelee = true;
+        else
+            canMelee = false;
+
+        _melee -= Time.deltaTime;
+
+        _combo -= Time.deltaTime;
+
+        if( _combo <= 0)
+        {
+            comboID = 1;
+            _combo = 0;
+        } 
+
+        if(_melee <= 0)
+            _melee = 0;
+
+
         if (_actions.Player.Attack.triggered)
         {
             if (grannyController.zoomedIn)
-            {
-                StartCoroutine(RegularShot());
-            }
+            StartCoroutine(RegularShot());
 
-            else if(canMelee)
-            {
-                StartCoroutine(MeleeAttack());
-            }
+            else if (canMelee)
+            StartCoroutine(MeleeAttack());
         }
-        //------------------ Charging Actions -------------------
+        //------------------ Charging Actions -------------------------------
         if (_actions.Player.Attack.IsPressed())
-        {
-            isCharging = true;
-        }
+        isCharging = true;
+
         else isCharging = false;
 
         if (isCharging)
-        {
             chargeGauge += Time.deltaTime;
-        }
 
         if (_actions.Player.Attack.WasReleasedThisFrame())
         {
@@ -90,17 +104,14 @@ public class GrannyAttackScript : MonoBehaviour
             }
             else chargeGauge = 0;
         }
-        //----------------------------------------------------------
+        //-------------------------------------------------------------------
 
         //Aiming Controls
         if (grannyController.zoomedIn)
-        {
             _bodyAim.weight = .75f;
-        }
+
         else
-        {
             _bodyAim.weight = 0;
-        }
 
             Vector2 screenCenterPoint = new Vector2(Screen.width * .5f, Screen.height * .5f);
 
@@ -117,6 +128,9 @@ public class GrannyAttackScript : MonoBehaviour
 
     IEnumerator MeleeAttack()
     {
+        _combo = comboTimer;
+        _melee = meleeTimer;
+        
         if(comboID == 1)
         {
             comboID = 2;
@@ -124,25 +138,25 @@ public class GrannyAttackScript : MonoBehaviour
             comboTimer = 1;
         }
 
-        else if (comboID == 2 && comboTimer > 0)
+        else if (comboID == 2 && _combo > 0)
         {
             comboID = 3;
             _anim.SetTrigger("Swing02");
             comboTimer = 1;
         }
 
-        else if (comboID == 3 && comboTimer > 0)
+        else if (comboID == 3 && _combo > 0)
         {
             comboID = 1;
             _anim.SetTrigger("Swing03");
         }
-        canMelee = false;
+        //canMelee = false;
         yield return new WaitForSeconds(.25f);
         playerHitSphere.SetActive(true);
         yield return new WaitForSeconds(.1f);
         playerHitSphere.SetActive(false);
         yield return new WaitForSeconds(.4f);
-        canMelee = true;
+        //canMelee = true;
     }
 
     IEnumerator RegularShot()

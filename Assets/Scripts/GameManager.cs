@@ -24,15 +24,18 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (grannyController.zoomedIn)
-        {
             aimPanel.SetActive(true);
-        }
-        else
-        {
-            aimPanel.SetActive(false);
-        }
 
-        chargeMeter = grannyAttack.chargeGauge - 0.5f;
+        else
+            aimPanel.SetActive(false);
+
+        chargeMeter = grannyAttack.chargeGauge - .5f;
         chargeIcon.fillAmount = chargeMeter;
+
+        if(chargeIcon.fillAmount < 1)
+            chargeIcon.color = Color.darkRed;
+
+        else
+            chargeIcon.color = Color.darkSeaGreen;
     }
 }
